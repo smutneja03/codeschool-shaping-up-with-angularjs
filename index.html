@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!-- Attach the application module to the page -->
+<html ng-app="store">
+<!-- A directive is a marker on a HTML tag that tells angular to run or reference some Javascript code -->
+<!-- ng-app is another directive. This directive creates an angular application by running the module store
+	when the document loads -->
+
+	<!-- Directives allows you to write HTML that expresses the behaviour of your application
+	Just by reading the element name one can figure out what the part does i.e. expressiveness 
+	-->
+	<!-- Custom Directive to write expressive HTML -->
+	<head>
+		<title>Angular Basics</title>
+		<link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="styles/main.css">
+	</head>
+	<body ng-controller="StoreCtrl" class="container">
+		<!-- Attach a controller function to the page -->
+		<header>
+			<h1 class="text-center">A Store of Gems</h1>
+			<h2 class="text-center">an Angular store</h2>
+		</header>
+		<div class="list-group">
+			<div class="list-group-item" ng-repeat="product in products | limitTo:5 | orderBy:'price'">
+				<h3 ng-include="'product-title.html'">
+					<!-- ng-include is expecting a variable with the name of the file to include.
+					To pass the name directly as a string, use single quotes -->
+				</h3>	
+				<!-- src will not work because in that case browser will try to load the image even before the 
+				expression is evaluated -->
+				<img width="250" height="250" ng-src="{{product.images[0].full}}">
+
+				<br /><br />
+				
+				<!-- dash in HTML translates to Camel Case in js directive definition -->
+				<product-panels></product-panels> 
+
+			</div>
+
+			<!-- Expressions define a two way data binding, which means Expressions are re evaluated when a property changes -->
+		</div>
+
+		<script type="text/javascript" src="scripts/angular.min.js"></script>
+		<script type="text/javascript" src="scripts/app.js"></script>
+		<script type="text/javascript" src="scripts/products.js"></script>
+		
+	</body>
+	</html>
